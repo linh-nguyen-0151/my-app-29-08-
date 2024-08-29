@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // hooks
 import useSessionStorage from 'hooks/useSessionStorage';
@@ -13,11 +13,11 @@ import { LoginRequest } from 'models/SampleModel';
 import { STORAGE_KEYS } from 'constants/common';
 
 const LoginPage: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [accessToken, setAccessToken] = useSessionStorage(STORAGE_KEYS.ACCESS_TOKEN);
 
   if (accessToken) {
-    history.push('/');
+    navigate('/');
     return null;
   }
 
@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
       .then((resp) => {})
       .finally(() => {
         setAccessToken('value');
-        history.push('/');
+        navigate('/');
       });
   };
 
